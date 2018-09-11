@@ -16,27 +16,11 @@ function isHtmlString(s) {
 }
 
 
-/*
- * Search for review queue list table,
- * returning null if not found
- */  
-function getTable() {
-
-    // find iFrame
-    const iFrameTableIdDocked = "_tableViewFrameDocked";
-    const iFrameTableIdUndocked = "_tableViewFrameUnDocked";
-    var iFrameTableEl = top.document.getElementById(iFrameTableIdDocked);
-    if (iFrameTableEl === null) {
-        // try undocked
-        iFrameTableEl = top.document.getElementById(iFrameTableIdUndocked);
-        if (iFrameTableEl === null) {
-            console.log("Could not get review queue.");
-            return null;
-        }  
+function getTableFrom(iframeElement) {
+    if (iframeElement === null) {
+        return null;
     }
-
-    var parentDoc = iFrameTableEl.contentDocument;
-
+    var parentDoc = iframeElement.contentDocument;
     // try by ID
     const id = "_reviewqueuelist_ctl00_itemList_listTable";
     var element = parentDoc.getElementById(id);
@@ -58,15 +42,41 @@ function getTable() {
 }
 
 
+
+function getChildTableByIFrameId(iFrameID) {
+    var iFrameTableEl = top.document.getElementById(iFrameID);
+
+    var table = getTableFrom(iFrameTableEl);
+    return table;
+}
+
+/*
+ * Search for review queue list table,
+ * returning null if not found
+ */  
+function getDockedTable() {
+
+    // find iFrame
+    const iFrameTableIdDocked = "_tableViewFrameDocked";
+    return getChildTableByIFrameId(iFrameTableIdDocked);
+    
+}
+
+
+function getUndockedTable() {
+    // find iFrame
+    const iFrameTableIdUndocked = "_tableViewFrameUnDocked";
+    return getChildTableByIFrameId(iFrameTableIdUndocked);
+}
+
+
 /*
  * Transforms the table's cells into HTML if 
  * the innerText property looks like HTML
  */
-function transformIntoHtml() {
-    var tbl = getTable();
-
+function transformIntoHtml(tbl) {
     if (tbl === null) {
-        console.log("Could not get table.");
+        console.log("Table is null");
         return;
     }
 
@@ -95,7 +105,10 @@ function transformIntoHtml() {
  */ 
 function hackyPiehStartup() {
     // todo: add onloaded event handler for iFrames
-    transformIntoHtml();
+    var dockedTbl = getDockedTable();
+    var undockedTbl = getUndockedTable();
+    transformIntoHtml(dockedTbl);
+    transformIntoHtml(undockedTbl);
 }
 
 
