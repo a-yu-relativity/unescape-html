@@ -1,4 +1,8 @@
-﻿
+﻿// Global constants
+const DOCKED_IFRAME_ID = "_tableViewFrameDocked";
+const UNDOCKED_IFRAME_ID = "_tableViewFrameUnDocked";
+
+
 /*
  * Converts the element's innerHTML to its innerText
  */  
@@ -42,31 +46,25 @@ function getTableFrom(iframeElement) {
 }
 
 
-
 function getChildTableByIFrameId(iFrameID) {
     var iFrameTableEl = top.document.getElementById(iFrameID);
-
     var table = getTableFrom(iFrameTableEl);
     return table;
 }
+
 
 /*
  * Search for review queue list table,
  * returning null if not found
  */  
 function getDockedTable() {
-
-    // find iFrame
-    const iFrameTableIdDocked = "_tableViewFrameDocked";
-    return getChildTableByIFrameId(iFrameTableIdDocked);
-    
+    return getChildTableByIFrameId(DOCKED_IFRAME_ID);
 }
 
 
 function getUndockedTable() {
     // find iFrame
-    const iFrameTableIdUndocked = "_tableViewFrameUnDocked";
-    return getChildTableByIFrameId(iFrameTableIdUndocked);
+    return getChildTableByIFrameId(UNDOCKED_IFRAME_ID);
 }
 
 
@@ -103,13 +101,25 @@ function transformIntoHtml(tbl) {
 /*
  * Renders plaintext as proper HTML
  */ 
-function hackyPiehStartup() {
-    // todo: add onloaded event handler for iFrames
+function applyTransformToDockedAndUndocked() {
     var dockedTbl = getDockedTable();
     var undockedTbl = getUndockedTable();
     transformIntoHtml(dockedTbl);
     transformIntoHtml(undockedTbl);
 }
 
+
+function attachListenerTo(iFrame) {
+    iFrame.addEventListener("load", applyTransformToDockedAndUndocked);
+}
+
+
+function hackyPiehStartup() {
+    dockedFrame = top.document.getElementById(DOCKED_IFRAME_ID);
+    undockedFrame = top.document.getElementById(UNDOCKED_IFRAME_ID);
+    attachListenerTo(dockedFrame);
+    attachListenerTo(undockedFrame);
+    applyTransformToDockedAndUndocked();
+}
 
 hackyPiehStartup();
