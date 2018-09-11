@@ -110,7 +110,8 @@ function applyTransformToDockedAndUndocked() {
 
 
 function attachListenerTo(iFrame) {
-    iFrame.addEventListener("load", applyTransformToDockedAndUndocked);
+    if (iFrame !== null)
+        iFrame.addEventListener("load", applyTransformToDockedAndUndocked);
 }
 
 
