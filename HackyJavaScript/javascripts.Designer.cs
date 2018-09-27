@@ -19,7 +19,7 @@ namespace HackyJavaScript {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class javascripts {
@@ -61,7 +61,30 @@ namespace HackyJavaScript {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to // Global constants
+        ///const DOCKED_IFRAME_ID = &quot;_tableViewFrameDocked&quot;;
+        ///const UNDOCKED_IFRAME_ID = &quot;_tableViewFrameUnDocked&quot;;
+        ///
+        ///
+        ////*
+        /// * Converts the element&apos;s innerHTML to its innerText
+        /// */  
+        ///function innerTextToHtml(element) {
+        ///    var text = element.innerText;
+        ///    element.innerHTML = text;
+        ///}
+        ///
+        ///
+        ////*
+        /// * Is this string an HTML element? 
+        /// */ 
+        ///function isHtmlString(s) {
+        ///    return s.startsWith(&quot;&lt;&quot;) &amp;&amp; s.endsWith(&quot;&gt;&quot;);
+        ///}
+        ///
+        ///
+        ///function getTableFrom(iframeElement) {
+        ///    if (iframeElement === null) {        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string htmlscript {
             get {

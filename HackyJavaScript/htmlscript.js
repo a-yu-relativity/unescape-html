@@ -74,7 +74,7 @@ function getUndockedTable() {
  */
 function transformIntoHtml(tbl) {
     if (tbl === null) {
-        console.log("Table is null");
+        //console.log("Table is null");
         return;
     }
 

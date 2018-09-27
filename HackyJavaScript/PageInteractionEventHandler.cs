@@ -8,7 +8,7 @@ using Relativity.Services.Objects;
 
 namespace HackyJavaScript
 {
-    [kCura.EventHandler.CustomAttributes.Description("Show HTML Doc Viewer List")]
+    [kCura.EventHandler.CustomAttributes.Description("My page interaction event handler")]
     [System.Runtime.InteropServices.Guid("fa6dcfa3-6507-4198-9c34-911f4da28aba")]
     public class PageInteractionEventhandler : kCura.EventHandler.PageInteractionEventHandler
     {
@@ -23,7 +23,6 @@ namespace HackyJavaScript
             };
 
             int currentWorkspaceArtifactID = Helper.GetActiveCaseID();
-
 
             // js file compiled into string
             string htmlScript = $"<script type=\"text/javascript\">\n {javascripts.htmlscript} \n</script>";
